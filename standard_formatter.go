@@ -19,7 +19,8 @@ func (f StandardFormatter) Format(message string, levelname string, lineno strin
 	s = strings.ReplaceAll(s, "${lineno}", lineno)
 
 	// datetime
-	s = strings.ReplaceAll(s, "${datetime}", datetime.String())
+	dtB, _ := datetime.MarshalText()
+	s = strings.ReplaceAll(s, "${datetime}", string(dtB))
 
 	// levelname
 	s = strings.ReplaceAll(s, "${levelname}", levelname)
