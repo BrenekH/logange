@@ -14,24 +14,6 @@ type Logger struct {
 	parents  []*Logger
 }
 
-// NewLogger returns an properly instantiated Logger type
-func NewLogger(name string) Logger {
-	l := getLogger(name)
-
-	l.AddParent(RootLogger)
-
-	return l
-}
-
-// getLogger returns an properly instantiated Logger type
-func getLogger(name string) Logger {
-	return Logger{
-		name:     name,
-		handlers: make([]Handler, 0),
-		parents:  make([]*Logger, 0),
-	}
-}
-
 // AddHandler adds the provided handler to the Logger
 func (l *Logger) AddHandler(h Handler) {
 	l.handlers = append(l.handlers, h)
@@ -105,4 +87,22 @@ func (l *Logger) Error(s string) {
 func (l *Logger) Critical(s string) {
 	l.log(LevelCritical, s)
 	os.Exit(1)
+}
+
+// NewLogger returns an properly instantiated Logger type
+func NewLogger(name string) Logger {
+	l := getLogger(name)
+
+	l.AddParent(RootLogger)
+
+	return l
+}
+
+// getLogger returns an properly instantiated Logger type
+func getLogger(name string) Logger {
+	return Logger{
+		name:     name,
+		handlers: make([]Handler, 0),
+		parents:  make([]*Logger, 0),
+	}
 }

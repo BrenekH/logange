@@ -27,3 +27,10 @@ func (h *StdoutHandler) RecordLog(message string, logLvl Level, lineno string, n
 		fmt.Print(h.formatter.Format(message, LevelToString(logLvl), lineno, name, datetime))
 	}
 }
+
+// NewStdoutHandler returns an instantiated StdoutHandler type
+func NewStdoutHandler() StdoutHandler {
+	s := StdoutHandler{}
+	s.SetFormatter(defaultFormatter)
+	return s
+}
