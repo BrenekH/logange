@@ -9,6 +9,8 @@ type Handler interface {
 	RecordLog(message string, logLvl Level, lineno string, name string, datetime time.Time)
 	SetLevel(level Level)
 	SetFormatter(f Formatter)
+	Level() Level
+	LevelString() string
 }
 
 // Formatter is an interface for the Formatter used by logging

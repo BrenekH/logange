@@ -23,6 +23,16 @@ func (h *FileHandler) SetLevel(lvl Level) {
 	h.logLevel = lvl
 }
 
+// Level returns the current logging level
+func (h *FileHandler) Level() Level {
+	return h.logLevel
+}
+
+// LevelString returns the current logging level as a string
+func (h *FileHandler) LevelString() string {
+	return LevelToString(h.logLevel)
+}
+
 // RecordLog records the log to the stdout stream
 func (h *FileHandler) RecordLog(message string, logLvl Level, lineno string, name string, datetime time.Time) {
 	if logLvl >= h.logLevel {
