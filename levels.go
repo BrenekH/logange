@@ -22,10 +22,9 @@ var levelMap map[Level]string = map[Level]string{0: "TRACE", 10: "DEBUG", 20: "I
 
 // LevelToString converts the inputted Level id into a string name of the level name
 func LevelToString(id Level) (s string) {
-	s = ""
-	lkp, prs := levelMap[id]
-	if prs {
-		s = lkp
+	s, ok := levelMap[id]
+	if !ok {
+		s = ""
 	}
 	return
 }
