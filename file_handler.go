@@ -3,6 +3,7 @@ package logange
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"time"
 )
 
@@ -49,8 +50,11 @@ func (h *FileHandler) Close() {
 }
 
 // NewFileHandler returns an instantiated FileHandler type
-func NewFileHandler(filepath string) (FileHandler, error) {
-	f, err := os.OpenFile(filepath, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0644)
+func NewFileHandler(path string) (FileHandler, error) {
+	if err := os.MkdirAll(filepath.Dir(path), 0644); err != nil {
+		return FileHandler{}, err
+	}
+	f, err := os.OpenFile(path, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0644)
 	if err != nil {
 		return FileHandler{}, err
 	}
