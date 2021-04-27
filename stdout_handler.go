@@ -32,9 +32,9 @@ func (h *StdoutHandler) LevelString() string {
 }
 
 // RecordLog records the log to the stdout stream
-func (h *StdoutHandler) RecordLog(message string, logLvl Level, lineno string, name string, datetime time.Time) {
+func (h *StdoutHandler) RecordLog(message string, i []interface{}, logLvl Level, lineno string, name string, datetime time.Time) {
 	if logLvl >= h.logLevel {
-		fmt.Print(h.formatter.Format(message, LevelToString(logLvl), lineno, name, datetime))
+		fmt.Print(h.formatter.Format(fmt.Sprintf(message, i...), LevelToString(logLvl), lineno, name, datetime))
 	}
 }
 

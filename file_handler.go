@@ -35,9 +35,9 @@ func (h *FileHandler) LevelString() string {
 }
 
 // RecordLog records the log to the stdout stream
-func (h *FileHandler) RecordLog(message string, logLvl Level, lineno string, name string, datetime time.Time) {
+func (h *FileHandler) RecordLog(message string, i []interface{}, logLvl Level, lineno string, name string, datetime time.Time) {
 	if logLvl >= h.logLevel {
-		_, err := h.file.Write([]byte(h.formatter.Format(message, LevelToString(logLvl), lineno, name, datetime)))
+		_, err := h.file.Write([]byte(h.formatter.Format(fmt.Sprintf(message, i...), LevelToString(logLvl), lineno, name, datetime)))
 		if err != nil {
 			fmt.Printf("Error writing to log file %v: %v\n", h.file.Name(), err)
 		}

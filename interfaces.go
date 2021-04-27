@@ -6,7 +6,7 @@ import (
 
 // Handler is an interface for the Handlers used by logging
 type Handler interface {
-	RecordLog(message string, logLvl Level, lineno string, name string, datetime time.Time)
+	RecordLog(message string, i []interface{}, logLvl Level, lineno string, name string, datetime time.Time)
 	SetLevel(level Level)
 	SetFormatter(f Formatter)
 	Level() Level
