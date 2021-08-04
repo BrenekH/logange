@@ -8,9 +8,23 @@ Logging library which mimics Python's native `logging` library.
 
 Logange can be installed using the `go get -u github.com/BrenekH/logange` command.
 
+## Concepts
+
+Logange uses loggers, formatters, and handlers.
+
+Loggers are part of a family tree with `logange.RootLogger` as the base node.
+Logs will traverse the tree calling any attached handlers on the way to the root logger.
+
+Handlers take log messages and send them to defined sources.
+There are two handlers already available as part of Logange, `StdoutHandler` and `FileHandler` which are instantiated using `NewStdoutHandler` and `NewFileHandler` respectively.
+
+Formatters are used by handlers to add additional information to the logs.
+
 ## Usage
 
 ### Basic Setup
+
+The following code creates a logger called `main`, defines how the message should be formatted, and uses the `logange.StdoutHandler` to output messages to the console.
 
 ```go
 package main
