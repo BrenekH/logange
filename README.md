@@ -1,5 +1,7 @@
 # Logange
 
+[![GoDoc](https://pkg.go.dev/badge/github.com/BrenekH/logange)](https://pkg.go.dev/github.com/BrenekH/logange)
+
 Logging library which mimics Python's native `logging` library.
 
 > :warning: Logange is an experimental and non-production ready library. Use at your own risk.
