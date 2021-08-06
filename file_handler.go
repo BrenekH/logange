@@ -51,10 +51,10 @@ func (h *FileHandler) Close() {
 
 // NewFileHandler returns an instantiated FileHandler type
 func NewFileHandler(path string) (FileHandler, error) {
-	if err := os.MkdirAll(filepath.Dir(path), 0644); err != nil {
+	if err := os.MkdirAll(filepath.Dir(path), 0777); err != nil {
 		return FileHandler{}, err
 	}
-	f, err := os.OpenFile(path, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0644)
+	f, err := os.OpenFile(path, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0777)
 	if err != nil {
 		return FileHandler{}, err
 	}
