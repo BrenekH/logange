@@ -24,6 +24,13 @@ func (l *Logger) AddParent(lo *Logger) {
 	l.parents = append(l.parents, lo)
 }
 
+// NewLogger creates a new logger instance and sets this logger as a parent.
+func (l *Logger) NewLogger(name string) Logger {
+	newLogger := NewLogger(name)
+	newLogger.AddParent(l)
+	return newLogger
+}
+
 // log logs with a specified level
 func (l *Logger) log(lvl Level, s string, i []interface{}) {
 	_, _, lineno, ok := runtime.Caller(2)
