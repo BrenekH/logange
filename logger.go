@@ -26,7 +26,7 @@ func (l *Logger) AddParent(lo *Logger) {
 
 // NewLogger creates a new logger instance and sets this logger as a parent.
 func (l *Logger) NewLogger(name string) Logger {
-	newLogger := NewLogger(name)
+	newLogger := getLogger(name)
 	newLogger.AddParent(l)
 	return newLogger
 }
