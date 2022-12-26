@@ -32,7 +32,7 @@ func (l *Logger) NewLogger(name string) Logger {
 }
 
 // log logs with a specified level
-func (l *Logger) log(lvl Level, s string, i []interface{}) {
+func (l *Logger) log(lvl Level, s string, i []any) {
 	_, _, lineno, ok := runtime.Caller(2)
 	if !ok {
 		lineno = -1
@@ -53,7 +53,7 @@ func (l *Logger) log(lvl Level, s string, i []interface{}) {
 }
 
 // parentLog logs with all of the parameters passed to it
-func (l *Logger) parentLog(message string, i []interface{}, logLvl Level, lineno string, name string, datetime time.Time) {
+func (l *Logger) parentLog(message string, i []any, logLvl Level, lineno string, name string, datetime time.Time) {
 	// Call handlers
 	for _, v := range l.handlers {
 		v.RecordLog(message, i, logLvl, lineno, name, datetime)
@@ -66,32 +66,32 @@ func (l *Logger) parentLog(message string, i []interface{}, logLvl Level, lineno
 }
 
 // Trace records a log record using a format string with level of Trace.
-func (l *Logger) Trace(s string, i ...interface{}) {
+func (l *Logger) Trace(s string, i ...any) {
 	l.log(LevelTrace, s, i)
 }
 
 // Debug records a log record using a format string with level of Debug
-func (l *Logger) Debug(s string, i ...interface{}) {
+func (l *Logger) Debug(s string, i ...any) {
 	l.log(LevelDebug, s, i)
 }
 
 // Info records a log record using a format string with level of Info
-func (l *Logger) Info(s string, i ...interface{}) {
+func (l *Logger) Info(s string, i ...any) {
 	l.log(LevelInfo, s, i)
 }
 
 // Warn records a log record using a format string with level of Warn
-func (l *Logger) Warn(s string, i ...interface{}) {
+func (l *Logger) Warn(s string, i ...any) {
 	l.log(LevelWarn, s, i)
 }
 
 // Error records a log record using a format string with level of Error
-func (l *Logger) Error(s string, i ...interface{}) {
+func (l *Logger) Error(s string, i ...any) {
 	l.log(LevelError, s, i)
 }
 
 // Critical records a log record using a format string with level of Critical and then calls os.Exit(1).
-func (l *Logger) Critical(s string, i ...interface{}) {
+func (l *Logger) Critical(s string, i ...any) {
 	l.log(LevelCritical, s, i)
 	os.Exit(1)
 }
